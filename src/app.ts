@@ -33,6 +33,15 @@ io.on("connection", (socket: Socket) => {
     console.log("disonnect");
     clearInterval(interval);
   });
+
+  socket.on("click", (data) => {
+    console.log("click", data);
+    socket.emit("draw", { x: data.x, y: data.y, ch: " ", fg: 0x0, bg: 0x0 });
+  });
+
+  socket.on("move", (data) => {
+    socket.emit("draw", { x: data.x, y: data.y, ch: " ", fg: 0x0, bg: 0x0 });
+  });
 });
 
 httpServer.listen(3000, () => {
